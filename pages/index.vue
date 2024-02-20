@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import ButttonInput from "~/components/ButttonInput.vue";
+import Labels from "~/components/Labels.vue";
 
 const colorMode = useColorMode()
 const task = ref('')
@@ -25,11 +25,11 @@ const links = computed(() => [{
     <h1 class="text-3xl font-bold text-center my-10">
       ToDo List
     </h1>
-    <icon name="i-ph-airplane-landing-fill" class="text-3xl"/>
+<!--    <icon name="i-ph-airplane-landing-fill" class="text-3xl"/>-->
   </div>
   <UContainer>
     <UInput v-model="task" class=""/>
     <UButton @click="addTask">Add Task</UButton>
   </UContainer>
-  <ButttonInput/>
+  <Labels/>
 </template>
