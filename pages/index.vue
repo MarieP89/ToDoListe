@@ -6,7 +6,7 @@ const task = ref('')
 
 const links = computed(() => [{
   label: 'Home',
-  icon: 'i-heroicons-academic-cap'
+  icon: 'i-heroicons-home'
 }, {
 
   icon: colorMode.value === 'light' ? 'i-heroicons-sun' : 'i-heroicons-moon',
@@ -14,6 +14,7 @@ const links = computed(() => [{
     colorMode.value = colorMode.value === 'light' ? 'dark' : 'light'
   }
 }])
+
 
 </script>
 
@@ -24,6 +25,7 @@ const links = computed(() => [{
     <h1 class="text-3xl font-bold text-center my-10">
       ToDo List
     </h1>
+    <icon name="i-ph-airplane-landing-fill" class="text-3xl"/>
   </div>
   <UContainer>
     <UInput v-model="task" class=""/>

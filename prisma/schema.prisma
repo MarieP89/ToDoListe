@@ -13,4 +13,13 @@ datasource db {
 model Label {
   id   Int    @id @default(autoincrement())
   name String
+  Task Task[]
+}
+
+model Task {
+  id      Int     @id @default(autoincrement())
+  title   String
+  done    Boolean @default(false)
+  label   Label   @relation(fields: [labelId], references: [id])
+  labelId Int
 }
