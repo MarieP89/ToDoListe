@@ -18,10 +18,11 @@ export default {
         body: data
       });
     },
-    addLabel() {
-      this.sendData({name: this.label});
+    async addLabel() {
+      await this.sendData({name: this.label});
       this.labels.push(this.label);
       this.label = '';
+      await this.getLabels();
     },
     async getLabels() {
       const response = await $fetch('/api/getLabel');
