@@ -28,6 +28,22 @@ export default {
       const response = await $fetch('/api/getLabel');
       console.log('Response', response); //debug
       this.labels = response.body;
+    },
+    // async updateLabel()
+    async updateData(data) {
+      await $fetch('/api/updateLabel', {
+        method: 'PUT',
+        body: data
+      });
+    },
+    toogleEditMode(labelObj) {
+      labelObj.editing = !labelObj.editing;
+    },
+
+    async updateLabel(labelObj) {
+      await this.updateData({id: labelObj.id, name: labelObj.name})
+      labelObj.editing = false;
+      await this.getLabels();
     }
   }
 }
@@ -43,8 +59,11 @@ export default {
         <UButton icon="i-heroicons-plus-small-20-solid" @click="addLabel"/>
       </div>
       <div class="leading-9">
-        <div v-for="(labelObj, index) in labels" :key="index">
-          {{ labelObj.name }}
+        <div v-for="(labelObj, index) in labels" :key="index" class="flex">
+          <UInput v-model="labelObj.name" :disabled="!labelObj.editing" class="p-2 rounded w-52" type="text"
+                  variant="none"/>
+          <UButton icon="i-heroicons-pencil-square-16-solid" @click="toogleEditMode(labelObj)"/>
+          <UButton v-if="labelObj.editing" icon="i-heroicons-paper-airplane" @click="updateLabel(labelObj)"/>
         </div>
       </div>
     </div>
