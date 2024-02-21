@@ -56,14 +56,14 @@ export default {
     <div v-if="showInput" class="mt-2">
       <div class="flex items-center mb-2">
         <UInput v-model="label" class="p-2 rounded w-52" type="text"/>
-        <UButton icon="i-heroicons-plus-small-20-solid" @click="addLabel"/>
+        <UButton icon="i-heroicons-plus-20-solid" @click="addLabel" variant="ghost"/>
       </div>
       <div class="leading-9">
         <div v-for="(labelObj, index) in labels" :key="index" class="flex">
           <UInput v-model="labelObj.name" :disabled="!labelObj.editing" class="p-2 rounded w-52" type="text"
-                  variant="none"/>
-          <UButton icon="i-heroicons-pencil-square-16-solid" @click="toogleEditMode(labelObj)"/>
-          <UButton v-if="labelObj.editing" icon="i-heroicons-paper-airplane" @click="updateLabel(labelObj)"/>
+                 variant="none" />
+          <UButton icon="i-heroicons-pencil-square-16-solid" @click="toogleEditMode(labelObj)" variant="ghost"/>
+          <UButton v-if="labelObj.editing" icon="i-heroicons-paper-airplane" @click="updateLabel(labelObj)" variant="ghost"/>
         </div>
       </div>
     </div>
