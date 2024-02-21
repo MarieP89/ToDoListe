@@ -13,25 +13,25 @@ export default {
   },
   methods: {
     async sendData(data) {
-      await $fetch('/api/addLabel', {
+      await $fetch('/api/label/addLabel', {
         method: 'POST',
         body: data
       });
     },
-    async addLabel() {
+    async createLabel() {
       const response = await this.sendData({name: this.label});
       this.labels.push({...response, editing: false});
       this.label = '';
       await this.getLabels();
     },
     async getLabels() {
-      const response = await $fetch('/api/getLabel');
+      const response = await $fetch('/api/label/getLabel');
       this.labels = response.body.map(label => {
         return {...label, editing: false}
       });
     },
     async updateData(data) {
-      await $fetch('/api/updateLabel', {
+      await $fetch('/api/label/updateLabel', {
         method: 'PUT',
         body: data
       });
@@ -44,7 +44,7 @@ export default {
       labelObj.editing = !labelObj.editing;
     },
     async deleteLabel(labelId) {
-      await $fetch('/api/deleteLabel', {
+      await $fetch('/api/label/deleteLabel', {
         method: 'DELETE',
         body: {id: labelId}
       });
@@ -61,7 +61,7 @@ export default {
     <div v-if="showInput" class="mt-2">
       <div class="flex items-center mb-2">
         <UInput v-model="label" class="p-2 rounded w-52" type="text"/>
-        <UButton icon="i-heroicons-plus-20-solid" variant="ghost" @click="addLabel"/>
+        <UButton icon="i-heroicons-plus-20-solid" variant="ghost" @click="createLabel"/>
       </div>
       <div class="leading-9">
         <div v-for="(labelObj, index) in labels" :key="index" class="flex">

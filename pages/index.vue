@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import Labels from "~/components/Labels.vue";
+import Label from "~/components/Label.vue";
 
 const colorMode = useColorMode()
 const task = ref('')
@@ -31,5 +31,5 @@ const links = computed(() => [{
     <UInput v-model="task" class=""/>
     <UButton @click="addTask">Add Task</UButton>
   </UContainer>
-  <Labels/>
+  <Label/>
 </template>
