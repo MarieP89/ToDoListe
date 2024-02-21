@@ -19,31 +19,30 @@ export default {
       });
     },
     async addLabel() {
-      await this.sendData({name: this.label});
-      this.labels.push(this.label);
+      const response = await this.sendData({name: this.label});
+      this.labels.push({...response, editing: false});
       this.label = '';
       await this.getLabels();
     },
     async getLabels() {
       const response = await $fetch('/api/getLabel');
-      console.log('Response', response); //debug
-      this.labels = response.body;
+      this.labels = response.body.map(label =>{
+        return {...label, editing: false}
+      });
     },
-    // async updateLabel()
     async updateData(data) {
       await $fetch('/api/updateLabel', {
         method: 'PUT',
         body: data
       });
     },
-    toogleEditMode(labelObj) {
-      labelObj.editing = !labelObj.editing;
-    },
 
     async updateLabel(labelObj) {
-      await this.updateData({id: labelObj.id, name: labelObj.name})
-      labelObj.editing = false;
-      await this.getLabels();
+      if (labelObj.editing) {
+        await this.updateData({id: labelObj.id, name: labelObj.name})
+        await this.getLabels();
+      }
+      labelObj.editing = !labelObj.editing;
     }
   }
 }
@@ -62,8 +61,7 @@ export default {
         <div v-for="(labelObj, index) in labels" :key="index" class="flex">
           <UInput v-model="labelObj.name" :disabled="!labelObj.editing" class="p-2 rounded w-52" type="text"
                  variant="none" />
-          <UButton icon="i-heroicons-pencil-square-16-solid" @click="toogleEditMode(labelObj)" variant="ghost"/>
-          <UButton v-if="labelObj.editing" icon="i-heroicons-paper-airplane" @click="updateLabel(labelObj)" variant="ghost"/>
+          <UButton :icon="labelObj.editing ? 'i-heroicons-check-16-solid' : 'i-heroicons-pencil-square-16-solid' " @click="updateLabel(labelObj)" variant="ghost"/>
         </div>
       </div>
     </div>
