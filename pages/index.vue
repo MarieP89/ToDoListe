@@ -1,8 +1,7 @@
 <script lang="ts" setup>
 import Label from "~/components/Label.vue";
 import AppHeader from "~/components/AppHeader.vue";
-
-const task = ref('')
+import {Task} from "#components";
 
 </script>
 
@@ -15,9 +14,6 @@ const task = ref('')
     </h1>
 <!--    <icon name="i-ph-airplane-landing-fill" class="text-3xl"/>-->
   </div>
-  <UContainer>
-    <UInput v-model="task" class=""/>
-    <UButton @click="addTask">Add Task</UButton>
-  </UContainer>
+  <Task/>
   <Label/>
 </template>
