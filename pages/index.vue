@@ -1,26 +1,14 @@
 <script lang="ts" setup>
 import Label from "~/components/Label.vue";
+import AppHeader from "~/components/AppHeader.vue";
 
-const colorMode = useColorMode()
 const task = ref('')
-
-const links = computed(() => [{
-  label: 'Home',
-  icon: 'i-heroicons-home'
-}, {
-
-  icon: colorMode.value === 'light' ? 'i-heroicons-sun' : 'i-heroicons-moon',
-  click: () => {
-    colorMode.value = colorMode.value === 'light' ? 'dark' : 'light'
-  }
-}])
-
 
 </script>
 
 
 <template>
-  <UHorizontalNavigation :links="links"/>
+  <AppHeader/>
   <div>
     <h1 class="text-3xl font-bold text-center my-10">
       ToDo List
