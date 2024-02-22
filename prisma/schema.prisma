@@ -20,6 +20,6 @@ model Task {
   id      Int     @id @default(autoincrement())
   title   String
   done    Boolean @default(false)
-  label   Label   @relation(fields: [labelId], references: [id])
-  labelId Int
+  label   Label?  @relation(fields: [labelId], references: [id])
+  labelId Int?
 }

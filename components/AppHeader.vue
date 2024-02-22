@@ -18,5 +18,4 @@ const links = computed(() => [{
 
 <template>
   <UHorizontalNavigation :links="links"/>
-
 </template>
