@@ -13,7 +13,7 @@ export default {
   },
   methods: {
     async sendData(data) {
-      await $fetch('/api/label/addLabel', {
+      await $fetch('/api/label/createLabel', {
         method: 'POST',
         body: data
       });
