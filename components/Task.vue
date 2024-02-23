@@ -22,22 +22,29 @@ function clearSelected() {
 <template>
   <UContainer>
     <div class="flex space-x-4">
+<!--      <UInputMenu v-model="selectedLabel" :options="labels">-->
+<!--        <template #trailing>-->
+<!--          <div class="flex items-center">-->
+<!--            <UButton-->
+<!--                v-show="selectedLabel !== ''"-->
+<!--                :padded="false"-->
+<!--                color="gray"-->
+<!--                icon="i-heroicons-x-mark-20-solid"-->
+<!--                variant="link"-->
+<!--                @click="clearSelected">-->
+<!--            </UButton>-->
+<!--          </div>-->
+<!--        </template>-->
+<!--      </UInputMenu>-->
       <UInputMenu v-model="selectedLabel" :options="labels">
         <template #trailing>
-          <div class="flex items-center">
-            <UButton
-                v-show="selectedLabel !== ''"
-                :padded="false"
-                color="gray"
-                icon="i-heroicons-x-mark-20-solid"
-                variant="link"
-                @click="clearSelected">
-            </UButton>
-          </div>
+          <button v-if="selectedLabel" @click.stop="selectedLabel = ''" >
+            <Icon name="i-heroicons-x-mark-20-solid" />
+          </button>
         </template>
       </UInputMenu>
       <UInput v-model="task" class=""/>
-      <UButton @click="addTask">Add Task</UButton>
+      <UButton>Add Task</UButton>
     </div>
   </UContainer>
 </template>
